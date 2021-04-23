@@ -1,4 +1,4 @@
-const direction = {
+const DIRECTION = {
   ArrowDown: [0, 1],
   ArrowUp: [0, -1],
   ArrowRight: [1, 0],
@@ -12,19 +12,35 @@ const direction = {
   d: [1, 0],
   a: [-1, 0]
 };
-const intervalo = 80;
+let controles = { direction: { x: 1, y: 0 }, head: [{ x: 0, y: 0 }] };
+const INTERVALO = 80;
 let keyPress;
 
 let paper = document.querySelector("canvas");
 let looper = () => {
-  console.log();
-  setTimeout(looper, intervalo);
+  const cabe = controles.head[0];
+  let dx = controles.directcion.x;
+  let dy = controles.directcion.y;
+  cabe.x += dx;
+  cabe.x += dy;
+  requestAnimationFrame(draw);
+  console.log("looper");
+  setTimeout(looper, INTERVALO);
 };
 let ctx = paper.getContext("2d");
-ctx.fillStyle = "#3a9c54";
-ctx.fillRect(200, 200, 20, 20);
 
 document.onkeydown = (e) => {
-  keyPress = direction[e.key];
+  keyPress = DIRECTION[e.key];
   console.log(keyPress);
+};
+
+let draw = (color) => {
+  ctx.clearRect(0, 0, 400, 400);
+  ctx.fillStyle = "green";
+  const cabe = controles.head[0];
+  ctx.fillRect(cabe.x, cabe.y, 10, 10);
+};
+
+window.onload = () => {
+  looper();
 };
