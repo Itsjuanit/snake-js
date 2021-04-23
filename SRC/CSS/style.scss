@@ -1,0 +1,40 @@
+$background-colorP: #212121;
+$primary-color: #444;
+$background-colorS: #bfff00;
+$principal-font: 'Press Start 2P', cursive;;
+
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+    background-color: $background-colorP;
+    text-align: center;
+
+    .title {
+        font-family: $principal-font;
+        font-size: 4rem;
+        color: $background-colorS;
+    }
+    canvas {
+        border: solid 2px $background-colorS;
+        background-color: $background-colorS;
+    }
+
+    .footer {
+        font-family: $principal-font;
+
+        &-text {
+            color: $primary-color;
+            font-size: 0.9rem;
+
+            &-anchor {
+                text-decoration: none;
+                color: $background-colorS;
+            }
+        }
+    }
+}
