@@ -15,7 +15,11 @@ const DIRECCION = {
   a: [-1, 0]
 };
 
-let controles = { direccion: { x: 1, y: 0 }, bicho: [{ x: 0, y: 0 }] };
+let controles = {
+  direccion: { x: 1, y: 0 },
+  bicho: [{ x: 0, y: 0 }],
+  victima: { x: 0, y: 250 }
+};
 let teclaApre;
 
 let paper = document.querySelector("canvas");
@@ -44,7 +48,7 @@ let dibujar = (color) => {
   ctx.clearRect(0, 0, 400, 400);
   ctx.fillStyle = "green";
   const sq = controles.bicho[0];
-  ctx.fillRect(sq.x * PESO, sq.y * PESO, 20, 20);
+  ctx.fillRect(sq.x * PESO, sq.y * PESO, 20, 20);   
 };
 
 window.onload = () => {
