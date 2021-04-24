@@ -1,4 +1,5 @@
-const INTERVALO = 40;
+const INTERVALO = 80;
+const PESO = 10;
 const DIRECCION = {
   ArrowDown: [0, 1],
   ArrowUp: [0, -1],
@@ -25,7 +26,6 @@ let looper = () => {
   sq.x += dx;
   sq.y += dy;
   requestAnimationFrame(dibujar);
-  console.log("looper");
   setTimeout(looper, INTERVALO);
 };
 
@@ -33,14 +33,18 @@ let ctx = paper.getContext("2d");
 
 document.onkeydown = (e) => {
   teclaApre = DIRECCION[e.key];
-  console.log(teclaApre);
+  const [x, y] = teclaApre;
+  if (-x !== controles.direccion.x && -y !== controles.direccion.y) {
+    controles.direccion.x = x;
+    controles.direccion.y = y;
+  }
 };
 
 let dibujar = (color) => {
   ctx.clearRect(0, 0, 400, 400);
   ctx.fillStyle = "green";
   const sq = controles.bicho[0];
-  ctx.fillRect(sq.x, sq.y, 20, 20);
+  ctx.fillRect(sq.x * PESO, sq.y * PESO, 20, 20);
 };
 
 window.onload = () => {
