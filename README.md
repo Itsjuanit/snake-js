@@ -8,8 +8,8 @@
   </a>
 </p>
 
-> Es un proyecto para practicar sobre el uso de Javascript en formato del famoso juego SNAKE con canvas.
-
+> Es un proyecto de Javascript con canvas, en el mismo trate de emular el famoso juego Snake.
+> *Use Javascript con SCSS.
 ## Author
 
 👤 **Juan Ignacio Tejada**
