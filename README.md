@@ -9,6 +9,7 @@
 </p>
 
 > Es un proyecto de Javascript con canvas, en el mismo trate de emular el famoso juego Snake.
+> *Use Javascript con SCSS.
 ## Author
 
 👤 **Juan Ignacio Tejada**
