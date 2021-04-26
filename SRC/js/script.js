@@ -1,3 +1,4 @@
+const CANVASIZE = 400;
 const INTERVALO = 80;
 const PESO = 10;
 const DIRECCION = {
@@ -16,9 +17,19 @@ const DIRECCION = {
 };
 
 let controles = {
-  direccion: { x: 1, y: 0 },
-  bicho: [{ x: 0, y: 0 }],
-  victima: { x: 0, y: 250 }
+  direccion: {
+    x: 1,
+    y: 0
+  },
+  bicho: [{
+    x: 0,
+    y: 0
+  }],
+  victima: {
+    x: 0,
+    y: 250
+  },
+  jugando: false
 };
 let teclaApre;
 
@@ -45,13 +56,29 @@ document.onkeydown = (e) => {
 };
 
 let dibujar = (color) => {
-  ctx.clearRect(0, 0, 400, 400);
+  ctx.clearRect(0, 0, CANVASIZE, CANVASIZE);
   ctx.fillStyle = "green";
   const sq = controles.bicho[0];
-  ctx.fillRect(sq.x * PESO, sq.y * PESO, 20, 20);   
+  ctx.fillRect(sq.x * PESO, sq.y * PESO, 20, 20);
 };
 
+let randomSite = () => {
+  let whereDirection = Object.values(DIRECCION)
+  return {
+    x: parseInt((Math.random() * CANVASIZE) / PESO),
+    y: parseInt((Math.random() * CANVASIZE) / PESO),
+    d: whereDirection[parseInt(Math.random() * 11)]
+  };
+};
+
+//SE INICIA EL JUEGO
 window.onload = () => {
+  positions = randomSite();
+  let head = controles.bicho[0];
+  head.x = positions.x;
+  head.y = positions.y;
+  controles.direccion.x = positions.d[0];
+  controles.direccion.y = positions.d[1];
   //pruebas para ver si funciona
   //looper();
 };
