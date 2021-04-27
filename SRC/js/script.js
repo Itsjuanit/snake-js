@@ -95,5 +95,5 @@ window.onload = () => {
   victima.y = posiVic.y;
   
   //pruebas para ver si funciona
-  looper();
+  //looper();
 };
