@@ -21,10 +21,12 @@ let controles = {
     x: 1,
     y: 0
   },
-  bicho: [{
-    x: 0,
-    y: 0
-  }],
+  bicho: [
+    {
+      x: 0,
+      y: 0
+    }
+  ],
   victima: {
     x: 0,
     y: 250
@@ -55,15 +57,22 @@ document.onkeydown = (e) => {
   }
 };
 
-let dibujar = (color) => {
+let dibujar = () => {
   ctx.clearRect(0, 0, CANVASIZE, CANVASIZE);
-  ctx.fillStyle = "green";
   const sq = controles.bicho[0];
-  ctx.fillRect(sq.x * PESO, sq.y * PESO, 20, 20);
+  const victima = controles.victima;
+  draw("green", sq.x, sq.y);
+  draw("green", victima.x, victima.y);
+};
+
+let draw = (color, x, y) => {
+  console.log("draw", color, x, y);
+  ctx.fillStyle = color;
+  ctx.fillRect(x * PESO, y * PESO, 20, 20);
 };
 
 let randomSite = () => {
-  let whereDirection = Object.values(DIRECCION)
+  let whereDirection = Object.values(DIRECCION);
   return {
     x: parseInt((Math.random() * CANVASIZE) / PESO),
     y: parseInt((Math.random() * CANVASIZE) / PESO),
@@ -79,6 +88,12 @@ window.onload = () => {
   head.y = positions.y;
   controles.direccion.x = positions.d[0];
   controles.direccion.y = positions.d[1];
+
+  posiVic = randomSite();
+  let victima = controles.victima;
+  victima.x = posiVic.x;
+  victima.y = posiVic.y;
+  
   //pruebas para ver si funciona
-  //looper();
+  looper();
 };
