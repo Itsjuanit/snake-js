@@ -21,12 +21,10 @@ let controles = {
     x: 1,
     y: 0
   },
-  bicho: [
-    {
-      x: 0,
-      y: 0
-    }
-  ],
+  bicho: [{
+    x: 0,
+    y: 0
+  }],
   victima: {
     x: 0,
     y: 250
@@ -38,10 +36,14 @@ let teclaApre;
 let paper = document.querySelector("canvas");
 let looper = () => {
   const sq = controles.bicho[0];
+  let atrapado = sq.x === controles.victima.x && sq.y === controles.victima.y;
   let dx = controles.direccion.x;
   let dy = controles.direccion.y;
   sq.x += dx;
   sq.y += dy;
+  if (atrapado) {
+    revictima();
+  }
   requestAnimationFrame(dibujar);
   setTimeout(looper, INTERVALO);
 };
@@ -61,8 +63,8 @@ let dibujar = () => {
   ctx.clearRect(0, 0, CANVASIZE, CANVASIZE);
   const sq = controles.bicho[0];
   const victima = controles.victima;
-  draw("green", sq.x, sq.y);
-  draw("green", victima.x, victima.y);
+  draw("#3c9e3a", sq.x, sq.y);
+  draw("#60bf79", victima.x, victima.y);
 };
 
 let draw = (color, x, y) => {
@@ -80,6 +82,13 @@ let randomSite = () => {
   };
 };
 
+let revictima = () => {
+  let newPosition = randomSite();
+  let victima = controles.victima;
+  victima.x = newPosition.x;
+  victima.y = newPosition.y;
+};
+
 //SE INICIA EL JUEGO
 window.onload = () => {
   positions = randomSite();
@@ -93,7 +102,7 @@ window.onload = () => {
   let victima = controles.victima;
   victima.x = posiVic.x;
   victima.y = posiVic.y;
-  
+
   //pruebas para ver si funciona
   //looper();
 };
