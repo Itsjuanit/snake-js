@@ -1,3 +1,4 @@
+// const = asdas
 const CANVASIZE = 400;
 const INTERVALO = 80;
 const PESO = 10;
@@ -21,28 +22,50 @@ let controles = {
     x: 1,
     y: 0
   },
-  bicho: [{
-    x: 0,
-    y: 0
-  }],
+  bicho: [
+    {
+      x: 0,
+      y: 0
+    }
+  ],
   victima: {
     x: 0,
     y: 250
   },
-  jugando: false
+  jugando: false,
+  crecimiento: 0
 };
+
 let teclaApre;
 
 let paper = document.querySelector("canvas");
+
 let looper = () => {
+  let cola = {};
+  Object.assign(cola, controles.bicho[controles.bicho.length - 1]);
   const sq = controles.bicho[0];
   let atrapado = sq.x === controles.victima.x && sq.y === controles.victima.y;
   let dx = controles.direccion.x;
   let dy = controles.direccion.y;
-  sq.x += dx;
-  sq.y += dy;
+  let tamaño = controles.bicho.length - 1;
+  for (let idx = tamaño; idx > -1; idx--) {
+    const sq = controles.bicho[idx];
+    if (idx === 0) {
+      sq.x += dx;
+      sq.y += dy;
+    } else {
+      sq.x = controles.bicho[idx - 1].x;
+      sq.y = controles.bicho[idx - 1].y;
+    }
+  }
   if (atrapado) {
+    controles.crecimiento += 1;
     revictima();
+  }
+
+  if (controles.crecimiento > 0) {
+    controles.bicho.push(cola);
+    controles.crecimiento -= 1;
   }
   requestAnimationFrame(dibujar);
   setTimeout(looper, INTERVALO);
@@ -61,10 +84,12 @@ document.onkeydown = (e) => {
 
 let dibujar = () => {
   ctx.clearRect(0, 0, CANVASIZE, CANVASIZE);
-  const sq = controles.bicho[0];
+  for (let idx = 0; idx < controles.bicho.length; idx++) {
+    const { x, y } = controles.bicho[idx];
+    draw("#3c9e3a", x, y);
+  }
   const victima = controles.victima;
-  draw("#3c9e3a", sq.x, sq.y);
-  draw("#60bf79", victima.x, victima.y);
+  draw("#60bf79", victima.x, victima.y); 
 };
 
 let draw = (color, x, y) => {
@@ -104,5 +129,5 @@ window.onload = () => {
   victima.y = posiVic.y;
 
   //pruebas para ver si funciona
-  //looper();
+  looper();
 };
