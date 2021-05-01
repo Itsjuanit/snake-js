@@ -48,6 +48,7 @@ let looper = () => {
   if (detectarChoque()) {
     controles.jugando = false;
     console.log("fin");
+    reiniciar();
   }
   let dx = controles.direccion.x;
   let dy = controles.direccion.y;
@@ -67,7 +68,7 @@ let looper = () => {
   }
 
   if (atrapado) {
-    controles.crecimiento += 1;
+    controles.crecimiento += 2;
     revictima();
   }
 
@@ -85,8 +86,16 @@ let detectarChoque = () => {
     head.x < 0 ||
     head.x >= CANVASIZE / PESO ||
     head.y >= CANVASIZE / PESO ||
-    head.y < 0) {
+    head.y < 0
+  ) {
     return true;
+  }
+
+  for (let idx = 1; idx < controles.bicho.length; idx++) {
+    const sq = controles.bicho[idx];
+    if (sq.x === head.x && sq.y === head.y) {
+      return true;
+    }
   }
 };
 
@@ -133,20 +142,41 @@ let revictima = () => {
   victima.y = newPosition.y;
 };
 
-//SE INICIA EL JUEGO
-window.onload = () => {
+let reiniciar = () => {
+  controles = {
+    direccion: {
+      x: 1,
+      y: 0
+    },
+    bicho: [
+      {
+        x: 0,
+        y: 0
+      }
+    ],
+    victima: {
+      x: 0,
+      y: 250
+    },
+    jugando: false,
+    crecimiento: 0
+  };
   positions = randomSite();
   let head = controles.bicho[0];
   head.x = positions.x;
   head.y = positions.y;
   controles.direccion.x = positions.d[0];
   controles.direccion.y = positions.d[1];
-
   posiVic = randomSite();
   let victima = controles.victima;
   victima.x = posiVic.x;
   victima.y = posiVic.y;
   controles.jugando = true;
+};
+
+//SE INICIA EL JUEGO
+window.onload = () => {
+  reiniciar();
   //pruebas para ver si funciona
   looper();
 };
