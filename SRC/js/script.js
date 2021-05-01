@@ -45,19 +45,27 @@ let looper = () => {
   Object.assign(cola, controles.bicho[controles.bicho.length - 1]);
   const sq = controles.bicho[0];
   let atrapado = sq.x === controles.victima.x && sq.y === controles.victima.y;
+  if (detectarChoque()) {
+    controles.jugando = false;
+    console.log("fin");
+  }
   let dx = controles.direccion.x;
   let dy = controles.direccion.y;
   let tamaño = controles.bicho.length - 1;
-  for (let idx = tamaño; idx > -1; idx--) {
-    const sq = controles.bicho[idx];
-    if (idx === 0) {
-      sq.x += dx;
-      sq.y += dy;
-    } else {
-      sq.x = controles.bicho[idx - 1].x;
-      sq.y = controles.bicho[idx - 1].y;
+
+  if (controles.jugando) {
+    for (let idx = tamaño; idx > -1; idx--) {
+      const sq = controles.bicho[idx];
+      if (idx === 0) {
+        sq.x += dx;
+        sq.y += dy;
+      } else {
+        sq.x = controles.bicho[idx - 1].x;
+        sq.y = controles.bicho[idx - 1].y;
+      }
     }
   }
+
   if (atrapado) {
     controles.crecimiento += 1;
     revictima();
@@ -69,6 +77,17 @@ let looper = () => {
   }
   requestAnimationFrame(dibujar);
   setTimeout(looper, INTERVALO);
+};
+
+let detectarChoque = () => {
+  const head = controles.bicho[0];
+  if (
+    head.x < 0 ||
+    head.x >= CANVASIZE / PESO ||
+    head.y >= CANVASIZE / PESO ||
+    head.y < 0) {
+    return true;
+  }
 };
 
 let ctx = paper.getContext("2d");
@@ -89,7 +108,7 @@ let dibujar = () => {
     draw("#3c9e3a", x, y);
   }
   const victima = controles.victima;
-  draw("#60bf79", victima.x, victima.y); 
+  draw("#60bf79", victima.x, victima.y);
 };
 
 let draw = (color, x, y) => {
@@ -127,7 +146,7 @@ window.onload = () => {
   let victima = controles.victima;
   victima.x = posiVic.x;
   victima.y = posiVic.y;
-
+  controles.jugando = true;
   //pruebas para ver si funciona
   looper();
 };
