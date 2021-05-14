@@ -1,4 +1,5 @@
 // const = asdas
+
 const CANVASIZE = 400;
 const INTERVALO = 80;
 const PESO = 10;
