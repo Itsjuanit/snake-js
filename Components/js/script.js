@@ -15,26 +15,26 @@ const DIRECCION = {
   s: [0, 1],
   w: [0, -1],
   d: [1, 0],
-  a: [-1, 0]
+  a: [-1, 0],
 };
 
 let controles = {
   direccion: {
     x: 1,
-    y: 0
+    y: 0,
   },
   bicho: [
     {
       x: 0,
-      y: 0
-    }
+      y: 0,
+    },
   ],
   victima: {
     x: 0,
-    y: 250
+    y: 250,
   },
   jugando: false,
-  crecimiento: 0
+  crecimiento: 0,
 };
 
 let teclaApre;
@@ -49,8 +49,10 @@ let looper = () => {
   if (detectarChoque()) {
     controles.jugando = false;
     console.log("fin");
+    mostrarModal();
     reiniciar();
   }
+
   let dx = controles.direccion.x;
   let dy = controles.direccion.y;
   let tamaño = controles.bicho.length - 1;
@@ -132,35 +134,50 @@ let randomSite = () => {
   return {
     x: parseInt((Math.random() * CANVASIZE) / PESO),
     y: parseInt((Math.random() * CANVASIZE) / PESO),
-    d: whereDirection[parseInt(Math.random() * 11)]
+    d: whereDirection[parseInt(Math.random() * 11)],
   };
 };
-
+let puntuacion = 0;
 let revictima = () => {
   let newPosition = randomSite();
   let victima = controles.victima;
   victima.x = newPosition.x;
   victima.y = newPosition.y;
+  puntuacion += 1;
+  document.getElementById("puntuacion").innerHTML = `Puntuacion :${puntuacion}`;
 };
+function mostrarModal() {
+  const modal = document.getElementById("modal");
+  const puntuacion = document.getElementById("puntuacion").textContent;
+  const modalPuntuacion = document.getElementById("modal-puntuacion");
+  modalPuntuacion.textContent = puntuacion;
+  modal.style.display = "block";
+}
+const modalReiniciar = document.getElementById("modal-reiniciar");
+modalReiniciar.addEventListener("click", () => {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  reiniciar();
+});
 
 let reiniciar = () => {
   controles = {
     direccion: {
       x: 1,
-      y: 0
+      y: 0,
     },
     bicho: [
       {
         x: 0,
-        y: 0
-      }
+        y: 0,
+      },
     ],
     victima: {
       x: 0,
-      y: 250
+      y: 250,
     },
     jugando: false,
-    crecimiento: 0
+    crecimiento: 0,
   };
   positions = randomSite();
   let head = controles.bicho[0];

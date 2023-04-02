@@ -1,31 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./Components/CSS/style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./Components/assets/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./Components/assets/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./Components/assets/favicon-16x16.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./Components/assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./Components/assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./Components/assets/favicon-16x16.png"
+    />
     <title>Snake</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 class="title">SNAKE</h1>
+    <p id="puntuacion" class="title-puntuacion">Puntuación: 0</p>
     <canvas width="400" height="400"> </canvas>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h2>Perdiste</h2>
+        <p>Tu puntuación fue de <span id="modal-puntuacion"></span>.</p>
+        <button id="modal-reiniciar">Reiniciar</button>
+      </div>
+    </div>
+
     <footer class="footer">
-        <p class="footer-text">
-            Made with 💛 by
-            <a class="footer-text-anchor" href="https://portfolio-itsjuanit.vercel.app/" target="_blank"
-                title="Página web de Itsjuanit">Itsjuanit</a>
-        </p>
+      <p class="footer-text">
+        Made with 💛 by
+        <a
+          class="footer-text-anchor"
+          href="https://portfolio-itsjuanit.vercel.app/"
+          target="_blank"
+          title="Página web de Itsjuanit"
+          >Itsjuanit</a
+        >
+      </p>
     </footer>
 
     <script src="./Components/js/script.js"></script>
-</body>
-
+  </body>
 </html>

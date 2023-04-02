@@ -1,8 +1,7 @@
 $background-colorP: #212121;
 $primary-color: #444;
 $background-colorS: #bfff00;
-$principal-font: 'Press Start 2P', cursive;;
-
+$principal-font: "Press Start 2P", cursive;
 
 *,
 *:after,
@@ -11,30 +10,66 @@ $principal-font: 'Press Start 2P', cursive;;
 }
 
 body {
-    background-color: $background-colorP;
-    text-align: center;
+  background-color: $background-colorP;
+  text-align: center;
+  overflow: hidden;
 
-    .title {
-        font-family: $principal-font;
-        font-size: 4rem;
+  .title {
+    font-family: $principal-font;
+    font-size: 4rem;
+    color: $background-colorS;
+
+    &-puntuacion {
+      font-family: $principal-font;
+      font-size: 1rem;
+      color: #bfff00;
+    }
+  }
+
+  canvas {
+    border: solid 2px $background-colorS;
+    background-color: $background-colorS;
+  }
+
+  .footer {
+    font-family: $principal-font;
+
+    &-text {
+      color: $primary-color;
+      font-size: 0.9rem;
+
+      &-anchor {
+        text-decoration: none;
         color: $background-colorS;
+      }
     }
-    canvas {
-        border: solid 2px $background-colorS;
-        background-color: $background-colorS;
-    }
+  }
 
-    .footer {
-        font-family: $principal-font;
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: #212121;
+  }
 
-        &-text {
-            color: $primary-color;
-            font-size: 0.9rem;
+  .modal-content {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid $background-colorS;
+    background-color: #212121;
+    color: $background-colorS;
+  }
 
-            &-anchor {
-                text-decoration: none;
-                color: $background-colorS;
-            }
-        }
-    }
+  button {
+    background-color: $background-colorS;
+    border: none;
+    color: #212121;
+    padding: 8px;
+    cursor: pointer;
+    font-family: $principal-font;
+    font-size: 1.2rem;
+  }
 }

@@ -1,37 +1,61 @@
 *,
 *:after,
 *:before {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #212121;
   text-align: center;
+  overflow: hidden;
 }
-
 body .title {
   font-family: "Press Start 2P", cursive;
   font-size: 4rem;
   color: #bfff00;
 }
-
+body .title-puntuacion {
+  font-family: "Press Start 2P", cursive;
+  font-size: 1rem;
+  color: #bfff00;
+}
 body canvas {
   border: solid 2px #bfff00;
   background-color: #bfff00;
 }
-
 body .footer {
   font-family: "Press Start 2P", cursive;
 }
-
 body .footer-text {
   color: #444;
   font-size: 0.9rem;
 }
-
 body .footer-text-anchor {
   text-decoration: none;
   color: #bfff00;
 }
-/*# sourceMappingURL=style.css.map */
+body .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #212121;
+}
+body .modal-content {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #bfff00;
+  background-color: #212121;
+  color: #bfff00;
+}
+body button {
+  background-color: #bfff00;
+  border: none;
+  color: #212121;
+  padding: 8px;
+  cursor: pointer;
+  font-family: "Press Start 2P", cursive;
+  font-size: 1.2rem;
+}/*# sourceMappingURL=style.css.map */
