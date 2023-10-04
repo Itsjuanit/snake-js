@@ -190,6 +190,10 @@ let reiniciar = () => {
   victima.x = posiVic.x;
   victima.y = posiVic.y;
   controles.jugando = true;
+
+  // Aquí reseteas la puntuación a 0
+  puntuacion = 0;
+  document.getElementById("puntuacion").innerHTML = `Puntuacion :${puntuacion}`;
 };
 
 //SE INICIA EL JUEGO
